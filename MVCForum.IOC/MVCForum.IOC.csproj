@@ -148,10 +148,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MVCForum.Core\MVCForum.Domain.csproj">
-      <Project>{20AD3D3C-153E-47AC-BA9C-3E4DB876990E}</Project>
-      <Name>MVCForum.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MVCForum.Services\MVCForum.Services.csproj">
       <Project>{14A002FB-9CCC-452A-A780-B322908CD45A}</Project>
       <Name>MVCForum.Services</Name>

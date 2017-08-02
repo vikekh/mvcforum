@@ -180,6 +180,8 @@
                             {
                                 try
                                 {
+                                    //TODO Save Access token to user
+
                                     // Users already exists, so log them in
                                     FormsAuthentication.SetAuthCookie(userExists.UserName, true);
                                     resultMessage.Message = LocalizationService.GetResourceString("Members.NowLoggedIn");

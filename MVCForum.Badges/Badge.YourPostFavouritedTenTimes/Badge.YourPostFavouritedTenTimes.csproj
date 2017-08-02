@@ -73,16 +73,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MVCForum.Core\MVCForum.Domain.csproj">
-      <Project>{20ad3d3c-153e-47ac-ba9c-3e4db876990e}</Project>
-      <Name>MVCForum.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MVCForum.Services\MVCForum.Services.csproj">
-      <Project>{14a002fb-9ccc-452a-a780-b322908cd45a}</Project>
-      <Name>MVCForum.Services</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

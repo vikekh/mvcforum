@@ -72,12 +72,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MVCForum.Core\MVCForum.Domain.csproj">
-      <Project>{20ad3d3c-153e-47ac-ba9c-3e4db876990e}</Project>
-      <Name>MVCForum.Domain</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>

@@ -1383,18 +1383,6 @@
       <Project>{47d979db-08a8-4c44-b21f-4b738e8334a2}</Project>
       <Name>Badge.YourPostFavourited</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MVCForum.Core\MVCForum.Domain.csproj">
-      <Project>{20AD3D3C-153E-47AC-BA9C-3E4DB876990E}</Project>
-      <Name>MVCForum.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MVCForum.IOC\MVCForum.IOC.csproj">
-      <Project>{B3A94898-2420-4FC0-8774-147FDE3B13B2}</Project>
-      <Name>MVCForum.IOC</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MVCForum.Utilities\MVCForum.Utilities.csproj">
-      <Project>{D0CE5E27-041D-4F1E-8C8C-5F4888C72155}</Project>
-      <Name>MVCForum.Utilities</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Web.config" />
