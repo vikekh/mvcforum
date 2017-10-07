@@ -6,7 +6,7 @@
     using Domain.DomainModel.Entities;
     using Domain.Interfaces;
     using Domain.Interfaces.Services;
-    using Data.Context;
+    using MvcForum.Core.Data.Context;
 
     public partial class BlockService : IBlockService
     {

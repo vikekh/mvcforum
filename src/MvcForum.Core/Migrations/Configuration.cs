@@ -8,11 +8,12 @@ using System.Text;
 using System.Web.Hosting;
 using MVCForum.Domain.Constants;
 using MVCForum.Domain.DomainModel;
-using MVCForum.Services.Data.Context;
 using MVCForum.Utilities;
 
 namespace MVCForum.Services.Migrations
 {
+    using MvcForum.Core.Data.Context;
+
     internal sealed class Configuration : DbMigrationsConfiguration<MVCForumContext>
     {
         public Configuration()

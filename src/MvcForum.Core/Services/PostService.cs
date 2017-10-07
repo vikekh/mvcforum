@@ -13,7 +13,7 @@
     using Domain.DomainModel.LinqKit;
     using Domain.Interfaces;
     using Domain.Interfaces.UnitOfWork;
-    using Data.Context;
+    using MvcForum.Core.Data.Context;
     using Utilities;
 
     public partial class PostService : IPostService

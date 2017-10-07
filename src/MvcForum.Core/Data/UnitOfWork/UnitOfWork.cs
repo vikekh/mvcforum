@@ -4,10 +4,11 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using MVCForum.Domain.Interfaces.Services;
 using MVCForum.Domain.Interfaces.UnitOfWork;
-using MVCForum.Services.Data.Context;
 
 namespace MVCForum.Services.Data.UnitOfWork
 {
+    using MvcForum.Core.Data.Context;
+
     public partial class UnitOfWork : IUnitOfWork
     {
         //http://msdn.microsoft.com/en-us/library/bb738523.aspx

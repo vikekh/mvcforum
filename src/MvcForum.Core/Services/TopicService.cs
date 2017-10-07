@@ -12,7 +12,7 @@
     using Domain.Interfaces;
     using Domain.Interfaces.Services;
     using Domain.Interfaces.UnitOfWork;
-    using Data.Context;
+    using MvcForum.Core.Data.Context;
     using Utilities;
 
     public partial class TopicService : ITopicService

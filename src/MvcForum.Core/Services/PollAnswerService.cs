@@ -7,8 +7,8 @@
     using Domain.DomainModel;
     using Domain.Interfaces;
     using Domain.Interfaces.Services;
-    using Data.Context;
     using Domain.Constants;
+    using MvcForum.Core.Data.Context;
     using Utilities;
 
     public partial class PollAnswerService : IPollAnswerService

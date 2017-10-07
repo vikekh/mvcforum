@@ -6,7 +6,7 @@
     using System.Data.Entity;
     using Domain.DomainModel;
     using Domain.Interfaces.Services;
-    using Data.Context;
+    using MvcForum.Core.Data.Context;
 
     public partial class UploadedFileService : IUploadedFileService
     {

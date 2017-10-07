@@ -8,7 +8,7 @@
     using System.Linq;
     using System.Data.Entity;
     using Domain.Interfaces;
-    using Data.Context;
+    using MvcForum.Core.Data.Context;
     using Utilities;
 
     public partial class TopicTagService : ITopicTagService

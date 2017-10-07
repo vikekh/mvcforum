@@ -1,17 +1,15 @@
-﻿using System;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration;
-using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Data.Entity.Validation;
-using System.Linq;
-using System.Reflection;
-using MVCForum.Domain.DomainModel;
-using MVCForum.Domain.DomainModel.Activity;
-using MVCForum.Domain.DomainModel.Entities;
-using MVCForum.Domain.Interfaces;
-
-namespace MVCForum.Services.Data.Context
+﻿namespace MvcForum.Core.Data.Context
 {
+    using System;
+    using System.Linq;
+    using System.Reflection;
+    using Microsoft.EntityFrameworkCore;
+    using MVCForum.Domain.DomainModel;
+    using MVCForum.Domain.DomainModel.Activity;
+    using MVCForum.Domain.DomainModel.Entities;
+    using MVCForum.Domain.Interfaces;
+    using MVCForum.Services.Migrations;
+
     public partial class MVCForumContext : DbContext, IMVCForumContext
     {
         /// <summary>

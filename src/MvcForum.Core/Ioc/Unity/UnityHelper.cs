@@ -5,11 +5,12 @@ using MVCForum.Domain.Interfaces.UnitOfWork;
 using MVCForum.Services;
 using Microsoft.Practices.Unity;
 using MVCForum.IOC.Quartz;
-using MVCForum.Services.Data.Context;
 using MVCForum.Services.Data.UnitOfWork;
 
 namespace MVCForum.IOC
 {
+    using MvcForum.Core.Data.Context;
+
     /// <summary>
     /// Bind the given interface in request scope
     /// </summary>

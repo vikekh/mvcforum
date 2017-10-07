@@ -9,7 +9,7 @@
     using Domain.Events;
     using Domain.Interfaces;
     using Domain.Interfaces.Services;
-    using Data.Context;
+    using MvcForum.Core.Data.Context;
 
     public partial class VoteService : IVoteService
     {

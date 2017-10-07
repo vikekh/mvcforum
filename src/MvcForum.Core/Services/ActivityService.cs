@@ -8,7 +8,7 @@
     using Domain.DomainModel.Activity;
     using Domain.Interfaces;
     using Domain.Interfaces.Services;
-    using Data.Context;
+    using MvcForum.Core.Data.Context;
     using Utilities;
 
     public partial class ActivityService : IActivityService
