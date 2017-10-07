@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web.Mvc;
 using MVCForum.Domain.Interfaces.Services;
 
 namespace MVCForum.Domain.Constants

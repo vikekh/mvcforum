@@ -1,20 +1,26 @@
-﻿using System.Data.Entity.ModelConfiguration;
-using MVCForum.Domain.DomainModel;
-
-namespace MVCForum.Services.Data.Mapping
+﻿namespace MvcForum.Core.Data.Mapping
 {
-    public class BadgeTypeTimeLastCheckedMapping : EntityTypeConfiguration<BadgeTypeTimeLastChecked>
+    using DomainModel.Entities;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+    public class BadgeTypeTimeLastCheckedConfiguration : IEntityTypeConfiguration<BadgeTypeTimeLastChecked>
     {
-        public BadgeTypeTimeLastCheckedMapping()
+        public void Configure(EntityTypeBuilder<BadgeTypeTimeLastChecked> builder)
         {
-            HasKey(x => x.Id);
-            Property(x => x.Id).IsRequired();
-            Property(x => x.BadgeType).IsRequired().HasMaxLength(50);
-            Property(x => x.TimeLastChecked).IsRequired();
-            HasRequired(t => t.User)
+            builder.ToTable("BadgeTypeTimeLastChecked");
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).IsRequired();
+            builder.Property(x => x.BadgeType).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.TimeLastChecked).IsRequired();
+
+            // Set the FK and the correct column name
+            builder.Property(x => x.MembershipUserId).IsRequired().HasColumnName("MembershipUser_Id");
+
+            builder.HasOne(t => t.User)
                 .WithMany(t => t.BadgeTypesTimeLastChecked)
-                .Map(m => m.MapKey("MembershipUser_Id"))
-                .WillCascadeOnDelete(false);
+                .HasForeignKey(p => p.MembershipUserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

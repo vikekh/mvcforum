@@ -1,27 +1,23 @@
-﻿using System.Data.Entity.ModelConfiguration;
-using MVCForum.Domain.DomainModel;
-
-namespace MVCForum.Services.Data.Mapping
+﻿namespace MvcForum.Core.Data.Mapping
 {
-    public class BadgeMapping : EntityTypeConfiguration<Badge>
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using MVCForum.Domain.DomainModel;
+
+    public class BadgeConfiguration : IEntityTypeConfiguration<Badge>
     {
-        public BadgeMapping()
+        public void Configure(EntityTypeBuilder<Badge> builder)
         {
-            HasKey(x => x.Id);
-
-            Property(x => x.Id).IsRequired();
-            Property(x => x.Name).IsRequired().HasMaxLength(50);
-            Property(x => x.Description).IsOptional();
-            Property(x => x.Type).IsRequired().HasMaxLength(50);
-            Property(x => x.Image).IsOptional().HasMaxLength(50);
-            Property(x => x.DisplayName).IsRequired().HasMaxLength(50);
-            Property(x => x.AwardsPoints).IsOptional();
-
-            // Ignores
-            Ignore(x => x.Milestone);
-
-            // TODO - Change Table Names
-            //ToTable("ForumBadge"); 
+            builder.ToTable("Badge");
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).IsRequired();
+            builder.Property(x => x.Name).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.Description);
+            builder.Property(x => x.Type).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.Image).HasMaxLength(50);
+            builder.Property(x => x.DisplayName).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.AwardsPoints);
+            builder.Ignore(x => x.Milestone);
         }
     }
 }

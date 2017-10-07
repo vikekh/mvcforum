@@ -1,14 +1,8 @@
-﻿using System;
-using MVCForum.Utilities;
-
-namespace MVCForum.Domain.DomainModel.Activity
+﻿namespace MvcForum.Core.DomainModel.Activity
 {
-    public enum ActivityType
-    {
-        BadgeAwarded,
-        MemberJoined,
-        ProfileUpdated,
-    }
+    using System;
+    using MVCForum.Domain.DomainModel;
+    using MVCForum.Utilities;
 
     public class Activity : Entity
     {
@@ -16,6 +10,7 @@ namespace MVCForum.Domain.DomainModel.Activity
         {
             Id = GuidComb.GenerateComb();
         }
+
         public Guid Id { get; set; }
         public string Type { get; set; }
         public string Data { get; set; }

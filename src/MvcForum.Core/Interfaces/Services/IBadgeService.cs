@@ -5,6 +5,8 @@ using MVCForum.Domain.DomainModel;
 
 namespace MVCForum.Domain.Interfaces.Services
 {
+    using MvcForum.Core.DomainModel.Entities;
+
     public partial interface IBadgeService
     {
 

@@ -1,21 +1,19 @@
-﻿using System.Data.Entity.ModelConfiguration;
-using MVCForum.Domain.DomainModel.Activity;
-
-namespace MVCForum.Services.Data.Mapping
+﻿namespace MvcForum.Core.Data.Mapping
 {
-    public class ActivityMapping : EntityTypeConfiguration<Activity>
+    using DomainModel.Activity;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+    public class ActivityConfiguration : IEntityTypeConfiguration<Activity>
     {
-        public ActivityMapping()
+        public void Configure(EntityTypeBuilder<Activity> builder)
         {
-            HasKey(x => x.Id);
-
-            Property(x => x.Id).IsRequired();
-            Property(x => x.Timestamp).IsRequired();
-            Property(x => x.Data).IsRequired();
-            Property(x => x.Type).IsRequired().HasMaxLength(50);
-
-            // TODO - Change Table Names
-            //ToTable("Activity"); 
+            builder.ToTable("Activity");
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).IsRequired();
+            builder.Property(x => x.Timestamp).IsRequired();
+            builder.Property(x => x.Data).IsRequired();
+            builder.Property(x => x.Type).IsRequired().HasMaxLength(50);
         }
     }
 }

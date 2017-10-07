@@ -1,17 +1,19 @@
-﻿using System.Data.Entity.ModelConfiguration;
-using MVCForum.Domain.DomainModel;
-
-namespace MVCForum.Services.Data.Mapping
+﻿namespace MvcForum.Core.Data.Mapping
 {
-    public class BannedWordMapping : EntityTypeConfiguration<BannedWord>
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using MVCForum.Domain.DomainModel;
+
+    public class BannedWordConfiguration : IEntityTypeConfiguration<BannedWord>
     {
-        public BannedWordMapping()
+        public void Configure(EntityTypeBuilder<BannedWord> builder)
         {
-            HasKey(x => x.Id);
-            Property(x => x.Id).IsRequired();
-            Property(x => x.Word).IsRequired().HasMaxLength(75);
-            Property(x => x.DateAdded).IsRequired();
-            Property(x => x.IsStopWord).IsOptional();
+            builder.ToTable("BannedWord");
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).IsRequired();
+            builder.Property(x => x.Word).IsRequired().HasMaxLength(75);
+            builder.Property(x => x.DateAdded).IsRequired();
+            builder.Property(x => x.IsStopWord);
         }
     }
 }

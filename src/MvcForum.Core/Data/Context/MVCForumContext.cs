@@ -1,25 +1,14 @@
 ﻿namespace MvcForum.Core.Data.Context
 {
-    using System;
-    using System.Linq;
-    using System.Reflection;
+    using DomainModel.Activity;
+    using DomainModel.Entities;
+    using ExtensionMethods.Data;
     using Microsoft.EntityFrameworkCore;
-    using MVCForum.Domain.DomainModel;
-    using MVCForum.Domain.DomainModel.Activity;
+    using MVCForum.Domain.DomainModel;    
     using MVCForum.Domain.DomainModel.Entities;
-    using MVCForum.Domain.Interfaces;
-    using MVCForum.Services.Migrations;
 
-    public partial class MVCForumContext : DbContext, IMVCForumContext
+    public class MvcForumContext : DbContext
     {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public MVCForumContext()   
-        {
-            Configuration.LazyLoadingEnabled = true;
-        }
-
         public DbSet<Activity> Activity { get; set; }
         public DbSet<Badge> Badge { get; set; }
         public DbSet<Block> Block { get; set; }
@@ -53,47 +42,10 @@
         public DbSet<Email> Email { get; set; }
         public DbSet<PostEdit> PostEdit { get; set; }
 
-
-        public override int SaveChanges()
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            try
-            {
-                return base.SaveChanges();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                // Retrieve the error messages as a list of strings.
-                var errorMessages = ex.EntityValidationErrors
-                        .SelectMany(x => x.ValidationErrors)
-                        .Select(x => x.ErrorMessage);
-
-                // Join the list to a single string.
-                var fullErrorMessage = string.Join("; ", errorMessages);
-
-                // Combine the original exception message with the new one.
-                var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
-
-                // Throw a new DbEntityValidationException with the improved exception message.
-                throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
-            }
-        }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            // http://stackoverflow.com/questions/7924758/entity-framework-creates-a-plural-table-name-but-the-view-expects-a-singular-ta
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-
-            var typesToRegister = Assembly.GetExecutingAssembly().GetTypes()
-                                    .Where(type => !string.IsNullOrEmpty(type.Namespace))
-                                    .Where(type => type.BaseType != null && type.BaseType.IsGenericType
-                                    && type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>));
-            foreach (var type in typesToRegister)
-            {
-                dynamic configurationInstance = Activator.CreateInstance(type);
-                modelBuilder.Configurations.Add(configurationInstance);
-            }
-            base.OnModelCreating(modelBuilder);  
-
+            modelBuilder.UseEntityTypeConfiguration();
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

@@ -1,16 +1,18 @@
-﻿using System.Data.Entity.ModelConfiguration;
-using MVCForum.Domain.DomainModel;
-
-namespace MVCForum.Services.Data.Mapping
+﻿namespace MvcForum.Core.Data.Mapping
 {
-    public class BannedEmailMapping : EntityTypeConfiguration<BannedEmail>
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using MVCForum.Domain.DomainModel;
+
+    public class BannedEmailConfiguration : IEntityTypeConfiguration<BannedEmail>
     {
-        public BannedEmailMapping()
+        public void Configure(EntityTypeBuilder<BannedEmail> builder)
         {
-            HasKey(x => x.Id);
-            Property(x => x.Id).IsRequired();
-            Property(x => x.Email).IsRequired().HasMaxLength(200);
-            Property(x => x.DateAdded).IsRequired();
+            builder.ToTable("BannedEmail");
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).IsRequired();
+            builder.Property(x => x.Email).IsRequired().HasMaxLength(200);
+            builder.Property(x => x.DateAdded).IsRequired();
         }
     }
 }

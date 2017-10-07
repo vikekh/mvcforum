@@ -1,12 +1,11 @@
-﻿using System.Web.Hosting;
-using System.Xml;
-using MVCForum.Domain.DomainModel.Enums;
-
-namespace MVCForum.Services
+﻿namespace MvcForum.Core.Config
 {
+    using System.Xml;
+    using MVCForum.Domain.DomainModel.Enums;
+    using MVCForum.Services;
+
     internal class SiteConfig
     {
-        private static string ConfigLocation => HostingEnvironment.MapPath("~/App_Data/forum.config");
         private readonly CacheService _cacheService;
 
         #region Singleton
@@ -18,7 +17,7 @@ namespace MVCForum.Services
             // We don't use the interface for this
             // because we always want our CacheService and the 
             // site config is likely to be used for our own custom IOC soon
-            _cacheService = new CacheService();    
+            _cacheService = new CacheService();
         }
 
         public static SiteConfig Instance
@@ -42,12 +41,12 @@ namespace MVCForum.Services
         #endregion
 
         public XmlNode GetSiteConfig()
-        {
+        {            
             const string cacheKey = "forumsiteconfig";
             var siteRootNode = _cacheService.Get<XmlNode>(cacheKey);
             if (siteRootNode == null)
             {
-                var xDoc = GetXmlDoc(ConfigLocation);
+                var xDoc = GetXmlDoc("~/App_Data/forum.config");
                 if (xDoc != null)
                 {
                     siteRootNode = xDoc.DocumentElement;

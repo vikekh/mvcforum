@@ -1,20 +1,18 @@
-﻿using System.Data.Entity.ModelConfiguration;
-using MVCForum.Domain.DomainModel;
-
-namespace MVCForum.Services.Data.Mapping
+﻿namespace MvcForum.Core.Data.Mapping
 {
-    public class CategoryNotificationMapping : EntityTypeConfiguration<CategoryNotification>
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using MVCForum.Domain.DomainModel;
+
+    public class CategoryNotificationConfiguration : IEntityTypeConfiguration<CategoryNotification>
     {
-        public CategoryNotificationMapping()
+        public void Configure(EntityTypeBuilder<CategoryNotification> builder)
         {
-            HasKey(x => x.Id);
-            Property(x => x.Id).IsRequired();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).IsRequired();
 
-            HasRequired(x => x.Category)
-                .WithMany(x => x.CategoryNotifications)
-                .Map(x => x.MapKey("Category_Id"))
-                .WillCascadeOnDelete(false);
-
+            builder.Property(x => x.CategoryId).IsRequired().HasColumnName("Category_Id");
+            builder.Property(x => x.MembershipUserId).IsRequired().HasColumnName("MembershipUser_Id");
         }
     }
 }

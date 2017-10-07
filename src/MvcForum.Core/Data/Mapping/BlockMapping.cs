@@ -1,17 +1,31 @@
-﻿using System.Data.Entity.ModelConfiguration;
-using MVCForum.Domain.DomainModel.Entities;
-
-namespace MVCForum.Services.Data.Mapping
+﻿namespace MvcForum.Core.Data.Mapping
 {
-    public class BlockMapping : EntityTypeConfiguration<Block>
+    using DomainModel.Entities;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+    public class BlockConfiguration : IEntityTypeConfiguration<Block>
     {
-        public BlockMapping()
+        public void Configure(EntityTypeBuilder<Block> builder)
         {
-            HasKey(x => x.Id);
-            Property(x => x.Id).IsRequired();
-            Property(x => x.Date).IsRequired();
-            HasRequired(x => x.Blocker).WithMany(x => x.BlockedUsers).Map(x => x.MapKey("Blocker_Id")).WillCascadeOnDelete(false);
-            HasRequired(x => x.Blocked).WithMany(x => x.BlockedByOtherUsers).Map(x => x.MapKey("Blocked_Id")).WillCascadeOnDelete(false);
+            builder.ToTable("Block");
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).IsRequired();
+            builder.Property(x => x.Date).IsRequired();
+
+            // FK mapping
+            builder.Property(x => x.BlockerId).IsRequired().HasColumnName("Blocker_Id");
+            builder.Property(x => x.BlockedId).IsRequired().HasColumnName("Blocked_Id");
+
+            builder.HasOne(x => x.Blocker)
+                .WithMany(x => x.BlockedUsers)
+                .HasForeignKey(x => x.BlockerId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(x => x.Blocked)
+                .WithMany(x => x.BlockedByOtherUsers)
+                .HasForeignKey(x => x.BlockedId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -5,6 +5,8 @@ using MVCForum.Domain.DomainModel.Activity;
 
 namespace MVCForum.Domain.Interfaces.Services
 {
+    using MvcForum.Core.DomainModel.Activity;
+
     public partial interface IActivityService
     {
         /// <summary>

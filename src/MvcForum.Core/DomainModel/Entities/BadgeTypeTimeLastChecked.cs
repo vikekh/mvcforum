@@ -1,10 +1,10 @@
-﻿using System;
-using MVCForum.Utilities;
-
-namespace MVCForum.Domain.DomainModel
+﻿namespace MvcForum.Core.DomainModel.Entities
 {
+    using System;
+    using MVCForum.Domain.DomainModel;
+    using MVCForum.Utilities;
 
-    public partial class BadgeTypeTimeLastChecked : Entity
+    public class BadgeTypeTimeLastChecked : Entity
     {
         public BadgeTypeTimeLastChecked()
         {
@@ -15,6 +15,9 @@ namespace MVCForum.Domain.DomainModel
         public string BadgeType { get; set; }
         public DateTime TimeLastChecked { get; set; }
 
-        public virtual MembershipUser User { get; set; }
+        // FK
+        public Guid MembershipUserId { get; set; }
+
+        public MembershipUser User { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using MVCForum.Services.Data.UnitOfWork;
 namespace MVCForum.IOC
 {
     using MvcForum.Core.Data.Context;
+    using MvcForum.Core.Services;
 
     /// <summary>
     /// Bind the given interface in request scope

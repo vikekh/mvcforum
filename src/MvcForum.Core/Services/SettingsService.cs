@@ -8,6 +8,7 @@
     using Domain.DomainModel.Enums;
     using Domain.Interfaces;
     using Domain.Interfaces.Services;
+    using MvcForum.Core.Constants;
     using MvcForum.Core.Data.Context;
 
     public partial class SettingsService : ISettingsService

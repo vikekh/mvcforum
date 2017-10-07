@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Web.Hosting;
 using MVCForum.Domain.Constants;
 using MVCForum.Domain.DomainModel;
 using MVCForum.Utilities;
 
 namespace MVCForum.Services.Migrations
 {
+    using MvcForum.Core.Constants;
     using MvcForum.Core.Data.Context;
 
     internal sealed class Configuration : DbMigrationsConfiguration<MVCForumContext>

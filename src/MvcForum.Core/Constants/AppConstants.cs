@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace MVCForum.Domain.Constants
+﻿namespace MvcForum.Core.Constants
 {
+    using System.Collections.Generic;
+
     public static class AppConstants
     {
         public const int SaltSize = 24;

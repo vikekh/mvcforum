@@ -12,6 +12,7 @@
     using Domain.Interfaces;
     using Domain.Interfaces.Services;
     using Domain.Interfaces.UnitOfWork;
+    using MvcForum.Core.Constants;
     using MvcForum.Core.Data.Context;
     using Utilities;
 

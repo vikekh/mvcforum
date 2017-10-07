@@ -8,6 +8,7 @@
     using Domain.Interfaces;
     using Domain.Interfaces.Services;
     using Domain.Constants;
+    using MvcForum.Core.Constants;
     using MvcForum.Core.Data.Context;
 
     public partial class MembershipUserPointsService : IMembershipUserPointsService

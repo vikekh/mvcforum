@@ -1,22 +1,23 @@
-﻿using System;
-
-namespace MVCForum.Domain.DomainModel.Activity
+﻿namespace MVCForum.Domain.DomainModel.Activity
 {
+    using System;
+    using MvcForum.Core.DomainModel.Activity;
+    using MvcForum.Core.DomainModel.Enums;
 
     public class ProfileUpdatedActivity : ActivityBase
     {
         public const string KeyUserId = @"UserID";
 
-        public MembershipUser User { get; set; }
-        
         /// <summary>
-        /// Constructor - useful when constructing a badge activity after reading database
+        ///     Constructor - useful when constructing a badge activity after reading database
         /// </summary>
         public ProfileUpdatedActivity(Activity activity, MembershipUser user)
         {
             ActivityMapped = activity;
             User = user;
         }
+
+        public MembershipUser User { get; set; }
 
         public static Activity GenerateMappedRecord(MembershipUser user, DateTime modified)
         {
@@ -26,7 +27,6 @@ namespace MVCForum.Domain.DomainModel.Activity
                 Timestamp = modified,
                 Type = ActivityType.ProfileUpdated.ToString()
             };
-
         }
     }
 }

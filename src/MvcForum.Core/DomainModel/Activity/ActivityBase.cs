@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-
-namespace MVCForum.Domain.DomainModel.Activity
+﻿namespace MvcForum.Core.DomainModel.Activity
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text.RegularExpressions;
+
     /// <summary>
     /// The purpose of this class is to add a base class to our more-derived activity classes,
     /// such as BadgeActivity. Those classes cannot inherit straight from the domain Activity class

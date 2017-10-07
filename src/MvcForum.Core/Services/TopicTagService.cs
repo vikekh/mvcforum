@@ -8,6 +8,7 @@
     using System.Linq;
     using System.Data.Entity;
     using Domain.Interfaces;
+    using MvcForum.Core.Constants;
     using MvcForum.Core.Data.Context;
     using Utilities;
 

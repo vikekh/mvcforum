@@ -6,6 +6,7 @@
     using System.Reflection;
     using Domain.Constants;
     using Domain.Interfaces.Services;
+    using MvcForum.Core.Constants;
 
     public partial class ReflectionService : IReflectionService
     {
