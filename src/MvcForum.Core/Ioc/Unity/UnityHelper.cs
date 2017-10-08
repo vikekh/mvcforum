@@ -1,16 +1,12 @@
-using System.Web.Mvc;
-using MVCForum.Domain.Interfaces;
-using MVCForum.Domain.Interfaces.Services;
-using MVCForum.Domain.Interfaces.UnitOfWork;
-using MVCForum.Services;
-using Microsoft.Practices.Unity;
-using MVCForum.IOC.Quartz;
-using MVCForum.Services.Data.UnitOfWork;
-
-namespace MVCForum.IOC
+namespace MvcForum.Core.Ioc.Unity
 {
-    using MvcForum.Core.Data.Context;
-    using MvcForum.Core.Services;
+    using Interfaces.Services;
+    using MVCForum.Domain.Interfaces.Services;
+    using MVCForum.Domain.Interfaces.UnitOfWork;
+    using MVCForum.IOC;
+    using MVCForum.IOC.Quartz;
+    using MVCForum.Services;
+    using Services;
 
     /// <summary>
     /// Bind the given interface in request scope

@@ -1,5 +1,6 @@
 ﻿namespace MvcForum.Core.Data.Mapping
 {
+    using DomainModel.Entities;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using MVCForum.Domain.DomainModel;

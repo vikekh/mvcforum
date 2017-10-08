@@ -1,19 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Infrastructure.Annotations;
-using System.Data.Entity.ModelConfiguration;
-using MVCForum.Domain.DomainModel;
-
-namespace MVCForum.Services.Data.Mapping
+﻿namespace MVCForum.Services.Data.Mapping
 {
-    public class MembershipUserMapping : EntityTypeConfiguration<MembershipUser>
+    using Domain.DomainModel;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+    public class MembershipUserConfiguration : IEntityTypeConfiguration<MembershipUser>
     {
-        public MembershipUserMapping()
+        public void Configure(EntityTypeBuilder<MembershipUser> builder)
         {
             HasKey(x => x.Id);
             Property(x => x.Id).IsRequired();
             Property(x => x.UserName).IsRequired().HasMaxLength(150)
-                                    .HasColumnAnnotation("Index",
-                                    new IndexAnnotation(new IndexAttribute("IX_MembershipUser_UserName", 1) { IsUnique = true }));
+                .HasColumnAnnotation("Index",
+                    new IndexAnnotation(new IndexAttribute("IX_MembershipUser_UserName", 1) {IsUnique = true}));
             Property(x => x.Password).IsRequired().HasMaxLength(128);
             Property(x => x.PasswordSalt).IsOptional().HasMaxLength(128);
             Property(x => x.Email).IsOptional().HasMaxLength(256);
@@ -31,8 +30,8 @@ namespace MVCForum.Services.Data.Mapping
             Property(x => x.PasswordResetToken).HasMaxLength(150).IsOptional();
             Property(x => x.PasswordResetTokenCreatedAt).IsOptional();
             Property(x => x.Slug).IsRequired().HasMaxLength(150)
-                                    .HasColumnAnnotation("Index",
-                                    new IndexAnnotation(new IndexAttribute("IX_MembershipUser_Slug", 1) { IsUnique = true }));
+                .HasColumnAnnotation("Index",
+                    new IndexAnnotation(new IndexAttribute("IX_MembershipUser_Slug", 1) {IsUnique = true}));
             Property(x => x.Comment).IsOptional();
             Property(x => x.Signature).IsOptional().HasMaxLength(1000);
             Property(x => x.Age).IsOptional();
@@ -62,9 +61,15 @@ namespace MVCForum.Services.Data.Mapping
             Property(x => x.LastActivityDate).IsOptional();
             Property(x => x.HasAgreedToTermsAndConditions).IsOptional();
 
+            // FK
+
+            // Indexes
+
+            // Ignores
             Ignore(x => x.TotalPoints);
             Ignore(x => x.NiceUrl);
 
+            // Relations
             HasMany(x => x.Topics).WithRequired(x => x.User)
                 .Map(x => x.MapKey("MembershipUser_Id"))
                 .WillCascadeOnDelete(false);
@@ -75,49 +80,45 @@ namespace MVCForum.Services.Data.Mapping
 
             // Has Many, as a user has many posts
             HasMany(x => x.Posts).WithRequired(x => x.User)
-               .Map(x => x.MapKey("MembershipUser_Id"))
+                .Map(x => x.MapKey("MembershipUser_Id"))
                 .WillCascadeOnDelete(false);
 
             HasMany(x => x.Votes).WithRequired(x => x.User)
-               .Map(x => x.MapKey("MembershipUser_Id"))
+                .Map(x => x.MapKey("MembershipUser_Id"))
                 .WillCascadeOnDelete(false);
 
             HasMany(x => x.VotesGiven).WithOptional(x => x.VotedByMembershipUser)
                 .Map(x => x.MapKey("VotedByMembershipUser_Id"));
 
             HasMany(x => x.TopicNotifications).WithRequired(x => x.User)
-               .Map(x => x.MapKey("MembershipUser_Id"))
+                .Map(x => x.MapKey("MembershipUser_Id"))
                 .WillCascadeOnDelete(false);
 
             HasMany(x => x.Polls).WithRequired(x => x.User)
-               .Map(x => x.MapKey("MembershipUser_Id"))
+                .Map(x => x.MapKey("MembershipUser_Id"))
                 .WillCascadeOnDelete(false);
 
             HasMany(x => x.PollVotes).WithRequired(x => x.User)
-               .Map(x => x.MapKey("MembershipUser_Id"))
-                .WillCascadeOnDelete(false);
-
-            HasMany(x => x.CategoryNotifications).WithRequired(x => x.User)
-               .Map(x => x.MapKey("MembershipUser_Id"))
+                .Map(x => x.MapKey("MembershipUser_Id"))
                 .WillCascadeOnDelete(false);
 
             HasMany(x => x.TagNotifications).WithRequired(x => x.User)
-            .Map(x => x.MapKey("MembershipUser_Id"))
-            .WillCascadeOnDelete(false);
+                .Map(x => x.MapKey("MembershipUser_Id"))
+                .WillCascadeOnDelete(false);
 
             HasMany(x => x.Points).WithRequired(x => x.User)
-               .Map(x => x.MapKey("MembershipUser_Id"))
+                .Map(x => x.MapKey("MembershipUser_Id"))
                 .WillCascadeOnDelete(false);
 
             HasMany(x => x.PrivateMessagesReceived)
-                    .WithRequired(x => x.UserTo)
-                    .Map(x => x.MapKey("UserTo_Id"))
-                    .WillCascadeOnDelete(false);
+                .WithRequired(x => x.UserTo)
+                .Map(x => x.MapKey("UserTo_Id"))
+                .WillCascadeOnDelete(false);
 
             HasMany(x => x.PrivateMessagesSent)
-                        .WithRequired(x => x.UserFrom)
-                        .Map(x => x.MapKey("UserFrom_Id"))
-                        .WillCascadeOnDelete(false);
+                .WithRequired(x => x.UserFrom)
+                .Map(x => x.MapKey("UserFrom_Id"))
+                .WillCascadeOnDelete(false);
 
             HasMany(x => x.BadgeTypesTimeLastChecked).WithRequired(x => x.User)
                 .Map(x => x.MapKey("MembershipUser_Id"))
@@ -125,29 +126,28 @@ namespace MVCForum.Services.Data.Mapping
 
             // Many-to-many join table - a user may belong to many roles
             HasMany(t => t.Roles)
-            .WithMany(t => t.Users)
-            .Map(m =>
-            {
-                m.ToTable("MembershipUsersInRoles");
-                m.MapLeftKey("UserIdentifier");
-                m.MapRightKey("RoleIdentifier");
-            });
-           
+                .WithMany(t => t.Users)
+                .Map(m =>
+                {
+                    m.ToTable("MembershipUsersInRoles");
+                    m.MapLeftKey("UserIdentifier");
+                    m.MapRightKey("RoleIdentifier");
+                });
+
             // Many-to-many join table - a badge may belong to many users
             HasMany(t => t.Badges)
-           .WithMany(t => t.Users)
-           .Map(m =>
-           {
-               m.ToTable("MembershipUser_Badge");
-               m.MapLeftKey("MembershipUser_Id");
-               m.MapRightKey("Badge_Id");
-           });
+                .WithMany(t => t.Users)
+                .Map(m =>
+                {
+                    m.ToTable("MembershipUser_Badge");
+                    m.MapLeftKey("MembershipUser_Id");
+                    m.MapRightKey("Badge_Id");
+                });
 
             HasMany(x => x.PostEdits)
                 .WithRequired(x => x.EditedBy)
                 .Map(x => x.MapKey("MembershipUser_Id"))
                 .WillCascadeOnDelete(false);
-
         }
     }
 }

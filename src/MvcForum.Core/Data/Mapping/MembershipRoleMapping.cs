@@ -1,15 +1,16 @@
-﻿using System.Data.Entity.ModelConfiguration;
-using MVCForum.Domain.DomainModel;
-
-namespace MVCForum.Services.Data.Mapping
+﻿namespace MvcForum.Core.Data.Mapping
 {
-    public class MembershipRoleMapping : EntityTypeConfiguration<MembershipRole>
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using MVCForum.Domain.DomainModel;
+
+    public class MembershipRoleConfiguration : IEntityTypeConfiguration<MembershipRole>
     {
-        public MembershipRoleMapping()
+        public void Configure(EntityTypeBuilder<MembershipRole> builder)
         {
-            HasKey(x => x.Id);
-            Property(x => x.Id).IsRequired();
-            Property(x => x.RoleName).IsRequired().HasMaxLength(256);
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).IsRequired();
+            builder.Property(x => x.RoleName).IsRequired().HasMaxLength(256);
         }
     }
 }

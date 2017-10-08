@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using MVCForum.Domain.DomainModel.Entities;
-using MVCForum.Utilities;
-
-namespace MVCForum.Domain.DomainModel
+﻿namespace MvcForum.Core.DomainModel.Entities
 {
-    public enum PostOrderBy
-    {
-        Standard,
-        Newest,
-        Votes
-    }
+    using System;
+    using System.Collections.Generic;
+    using MVCForum.Domain.DomainModel;
+    using MVCForum.Domain.DomainModel.Entities;
+    using MVCForum.Utilities;
 
     public partial class Post : Entity
     {
@@ -30,6 +24,12 @@ namespace MVCForum.Domain.DomainModel
         public bool? Pending { get; set; }
         public string SearchField { get; set; }
         public Guid? InReplyTo { get; set; }
+
+        // FK
+        public Guid TopicId { get; set; }
+        public Guid MembershipUserId { get; set; }
+
+        // Relations
         public virtual Topic Topic { get; set; }
         public virtual MembershipUser User { get; set; }
         public virtual IList<Vote> Votes { get; set; }

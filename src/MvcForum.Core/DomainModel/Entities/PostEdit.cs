@@ -3,6 +3,8 @@ using MVCForum.Utilities;
 
 namespace MVCForum.Domain.DomainModel.Entities
 {
+    using MvcForum.Core.DomainModel.Entities;
+
     public partial class PostEdit : Entity
     {
         public PostEdit()

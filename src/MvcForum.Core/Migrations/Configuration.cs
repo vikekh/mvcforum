@@ -12,6 +12,7 @@ namespace MVCForum.Services.Migrations
 {
     using MvcForum.Core.Constants;
     using MvcForum.Core.Data.Context;
+    using MvcForum.Core.DomainModel.Entities;
 
     internal sealed class Configuration : DbMigrationsConfiguration<MVCForumContext>
     {

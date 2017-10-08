@@ -4,6 +4,8 @@ using MVCForum.Utilities;
 
 namespace MVCForum.Domain.DomainModel
 {
+    using MvcForum.Core.DomainModel.Entities;
+
     public partial class Permission : Entity
     {
         public Permission()

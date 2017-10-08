@@ -8,6 +8,7 @@
     using Domain.Interfaces;
     using Domain.Interfaces.Services;
     using MvcForum.Core.Data.Context;
+    using MvcForum.Core.DomainModel.Entities;
 
 
     public partial class TopicNotificationService : ITopicNotificationService

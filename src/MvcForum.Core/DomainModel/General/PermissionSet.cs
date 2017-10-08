@@ -2,6 +2,8 @@
 
 namespace MVCForum.Domain.DomainModel
 {
+    using MvcForum.Core.DomainModel.Entities;
+
     public partial class PermissionSet : Dictionary<string, PermissionForRole>
     {
         public PermissionSet(IEnumerable<CategoryPermissionForRole> categoryPermissions, IEnumerable<GlobalPermissionForRole> globalPermissions)

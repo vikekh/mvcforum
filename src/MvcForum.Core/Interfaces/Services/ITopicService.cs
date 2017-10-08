@@ -7,6 +7,8 @@ using MVCForum.Domain.Interfaces.UnitOfWork;
 
 namespace MVCForum.Domain.Interfaces.Services
 {
+    using MvcForum.Core.DomainModel.Entities;
+
     public partial interface ITopicService
     {
         Topic SanitizeTopic(Topic topic);

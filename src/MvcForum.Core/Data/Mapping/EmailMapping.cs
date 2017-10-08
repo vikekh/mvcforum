@@ -1,19 +1,20 @@
-﻿using System.Data.Entity.ModelConfiguration;
-using MVCForum.Domain.DomainModel;
-
-namespace MVCForum.Services.Data.Mapping
+﻿namespace MvcForum.Core.Data.Mapping
 {
-    public class EmailMapping : EntityTypeConfiguration<Email>
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using MVCForum.Domain.DomainModel;
+
+    public class EmailConfiguration : IEntityTypeConfiguration<Email>
     {
-        public EmailMapping()
+        public void Configure(EntityTypeBuilder<Email> builder)
         {
-            HasKey(x => x.Id);
-            Property(x => x.Id).IsRequired();
-            Property(x => x.EmailTo).IsRequired().HasMaxLength(100);
-            Property(x => x.Body).IsRequired();
-            Property(x => x.Subject).IsRequired().HasMaxLength(200);
-            Property(x => x.NameTo).IsRequired().HasMaxLength(100);
-            Property(x => x.DateCreated).IsRequired();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).IsRequired();
+            builder.Property(x => x.EmailTo).IsRequired().HasMaxLength(100);
+            builder.Property(x => x.Body).IsRequired();
+            builder.Property(x => x.Subject).IsRequired().HasMaxLength(200);
+            builder.Property(x => x.NameTo).IsRequired().HasMaxLength(100);
+            builder.Property(x => x.DateCreated).IsRequired();
         }
     }
 }

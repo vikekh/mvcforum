@@ -1,29 +1,37 @@
-﻿using System.Data.Entity.ModelConfiguration;
-using MVCForum.Domain.DomainModel;
-
-namespace MVCForum.Services.Data.Mapping
+﻿namespace MvcForum.Core.Data.Mapping
 {
-    public class PostMapping : EntityTypeConfiguration<Post>
-    {
-        public PostMapping()
-        {
-            HasKey(x => x.Id);
-            Property(x => x.Id).IsRequired();
-            Property(x => x.PostContent).IsRequired();
-            Property(x => x.DateCreated).IsRequired();
-            Property(x => x.VoteCount).IsRequired();
-            Property(x => x.DateEdited).IsRequired();
-            Property(x => x.IsSolution).IsRequired();
-            Property(x => x.IsTopicStarter).IsOptional();
-            Property(x => x.FlaggedAsSpam).IsOptional();
-            Property(x => x.IpAddress).IsOptional().HasMaxLength(50);
-            Property(x => x.Pending).IsOptional();
-            Property(x => x.SearchField).IsOptional();
-            Property(x => x.InReplyTo).IsOptional();
+    using DomainModel.Entities;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-            HasMany(x => x.Votes).WithRequired(x => x.Post)
+    public class PostConfiguration : IEntityTypeConfiguration<Post>
+    {
+        public void Configure(EntityTypeBuilder<Post> builder)
+        {
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).IsRequired();
+            builder.Property(x => x.PostContent).IsRequired();
+            builder.Property(x => x.DateCreated).IsRequired();
+            builder.Property(x => x.VoteCount).IsRequired();
+            builder.Property(x => x.DateEdited).IsRequired();
+            builder.Property(x => x.IsSolution).IsRequired();
+            builder.Property(x => x.IsTopicStarter);
+            builder.Property(x => x.FlaggedAsSpam);
+            builder.Property(x => x.IpAddress).HasMaxLength(50);
+            builder.Property(x => x.Pending);
+            builder.Property(x => x.SearchField);
+            builder.Property(x => x.InReplyTo);
+
+            // FK
+            builder.Property(x => x.TopicId).IsRequired().HasColumnName("Topic_Id");
+            builder.Property(x => x.MembershipUserId).IsRequired().HasColumnName("MembershipUser_Id");
+
+            // Relations
+            builder.HasMany(x => x.Votes)
+                .WithOne(x => x.Post)
                 .Map(x => x.MapKey("Post_Id"))
                 .WillCascadeOnDelete(false);
+
             HasMany(x => x.PostEdits)
                 .WithRequired(x => x.Post)
                 .Map(x => x.MapKey("Post_Id"))

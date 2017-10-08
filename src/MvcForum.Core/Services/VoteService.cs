@@ -11,6 +11,7 @@
     using Domain.Interfaces.Services;
     using MvcForum.Core.Constants;
     using MvcForum.Core.Data.Context;
+    using MvcForum.Core.DomainModel.Entities;
 
     public partial class VoteService : IVoteService
     {

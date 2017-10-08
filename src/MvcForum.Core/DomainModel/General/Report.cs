@@ -1,5 +1,7 @@
 ﻿namespace MVCForum.Domain.DomainModel
 {
+    using MvcForum.Core.DomainModel.Entities;
+
     public partial class Report
     {
         public string Reason { get; set; }

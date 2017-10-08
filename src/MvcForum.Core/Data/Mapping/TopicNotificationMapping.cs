@@ -1,14 +1,20 @@
-﻿using System.Data.Entity.ModelConfiguration;
-using MVCForum.Domain.DomainModel;
-
-namespace MVCForum.Services.Data.Mapping
+﻿namespace MvcForum.Core.Data.Mapping
 {
-    public class TopicNotificationMapping : EntityTypeConfiguration<TopicNotification>
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using MVCForum.Domain.DomainModel;
+
+    public class TopicNotificationConfiguration : IEntityTypeConfiguration<TopicNotification>
     {
-        public TopicNotificationMapping()
+        public void Configure(EntityTypeBuilder<TopicNotification> builder)
         {
-            HasKey(x => x.Id);
-            Property(x => x.Id).IsRequired();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).IsRequired();
+
+            // FK
+
+
+            // Relations
         }
     }
 }

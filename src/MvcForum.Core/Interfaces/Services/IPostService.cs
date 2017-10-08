@@ -5,6 +5,8 @@ using MVCForum.Domain.Interfaces.UnitOfWork;
 
 namespace MVCForum.Domain.Interfaces.Services
 {
+    using MvcForum.Core.DomainModel.Entities;
+
     public partial interface IPostService
     {
         Post SanitizePost(Post post);

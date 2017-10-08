@@ -2,6 +2,8 @@
 
 namespace MVCForum.Domain.Events
 {
+    using MvcForum.Core.DomainModel.Entities;
+
     public class MarkedAsSolutionEventArgs : MVCForumEventArgs
     {
         public Topic Topic { get; set; }

@@ -1,15 +1,12 @@
-﻿namespace MVCForum.Services
+﻿namespace MvcForum.Core.Services
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Data.Entity;
-    using Domain.DomainModel;
-    using Domain.Interfaces;
-    using Domain.Interfaces.Services;
-    using Domain.Constants;
-    using MvcForum.Core.Constants;
-    using MvcForum.Core.Data.Context;
+    using Constants;
+    using DomainModel.Entities;
+    using Interfaces.Services;
+    using MVCForum.Domain.DomainModel;
+    using MVCForum.Domain.Interfaces.Services;
 
     public partial class GlobalPermissionForRoleService : IGlobalPermissionForRoleService
     {

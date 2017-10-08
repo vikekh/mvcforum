@@ -3,6 +3,8 @@ using MVCForum.Domain.DomainModel;
 
 namespace MVCForum.Services.Data.Mapping
 {
+    using MvcForum.Core.DomainModel.Entities;
+
     public class VoteMapping : EntityTypeConfiguration<Vote>
     {
         public VoteMapping()

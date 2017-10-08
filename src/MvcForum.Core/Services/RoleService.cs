@@ -11,6 +11,8 @@
     using Domain.Interfaces.Services;
     using MvcForum.Core.Constants;
     using MvcForum.Core.Data.Context;
+    using MvcForum.Core.DomainModel.Entities;
+    using MvcForum.Core.Interfaces.Services;
     using Utilities;
 
     public partial class RoleService : IRoleService
