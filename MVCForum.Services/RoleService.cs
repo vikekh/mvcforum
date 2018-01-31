@@ -42,7 +42,7 @@
         }
 
         /// <summary>
-        /// Get role by name
+        /// Get role by name, returning first role with name containing supplied role name
         /// </summary>
         /// <param name="rolename"></param>
         /// <param name="removeTracking">If true, adds AsNoTracking()</param>
@@ -62,6 +62,30 @@
                         .FirstOrDefault(y => y.RoleName.Contains(rolename));
                 }
                 return _context.MembershipRole.FirstOrDefault(y => y.RoleName.Contains(rolename));
+            });
+        }
+
+        /// <summary>
+        /// Get role by name, returning first role with name which equals supplied role name
+        /// </summary>
+        /// <param name="rolename"></param>
+        /// <param name="removeTracking">If true, adds AsNoTracking()</param>
+        /// <returns></returns>
+        public MembershipRole GetRoleEquals(string rolename, bool removeTracking = false)
+        {
+            var cacheKey = string.Concat(CacheKeys.Role.StartsWith, "GetRoleEquals-", rolename, "-", removeTracking);
+            return _cacheService.CachePerRequest(cacheKey, () =>
+            {
+                if (removeTracking)
+                {
+                    return _context.MembershipRole
+                        .Include(x => x.CategoryPermissionForRoles.Select(p => p.Permission))
+                        .Include(x => x.CategoryPermissionForRoles.Select(p => p.Category))
+                        .Include(x => x.GlobalPermissionForRole.Select(p => p.Permission))
+                        .AsNoTracking()
+                        .FirstOrDefault(y => y.RoleName == rolename);
+                }
+                return _context.MembershipRole.FirstOrDefault(y => y.RoleName == rolename);
             });
         }
 
